@@ -22,10 +22,19 @@ MongoClient.connect('mongodb://admin:admin123@ds013206.mlab.com:13206/codet-db',
     app.listen(process.env.PORT || 3000); 
 }); 
 
+//
+//app.get('/', function(req, res) { 
+//    res.render('home'); 
+//})
+
 
 app.get('/', function(req, res) { 
-    res.render('home'); 
-})
+    db.collection("notes").find({}).toArray(function(err, results) { 
+        res.render('home', {notes: results}); 
+        console.log(results); 
+    }); 
+
+}); 
 
 
 app.get('/new', function(req, res) { 

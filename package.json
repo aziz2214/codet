@@ -1,0 +1,17 @@
+{
+  "name": "codet",
+  "version": "0.0.1",
+  "description": "a beautiful note taking app for code students",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rashidaziz",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
+    "mongodb": "^2.2.24"
+  }
+}

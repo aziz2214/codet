@@ -29,8 +29,9 @@ MongoClient.connect('mongodb://admin:admin123@ds013206.mlab.com:13206/codet-db',
 
 
 app.get('/', function(req, res) { 
-    db.collection("notes").find({}).toArray(function(err, results) { 
-        res.render('home', {notes: results}); 
+    db.collection("notes").find({}).toArray(function(err, results) {
+        
+        res.render('home', {results: results}); 
         console.log(results); 
     }); 
 

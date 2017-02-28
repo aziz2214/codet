@@ -29,10 +29,9 @@ MongoClient.connect('mongodb://admin:admin123@ds013206.mlab.com:13206/codet-db',
 
 
 app.get('/', function(req, res) { 
-    db.collection("notes").find({}).toArray(function(err, results) {
-        
+    db.collection("notes").find().toArray(function(err, results) {
         res.render('home', {results: results}); 
-        console.log(results); 
+        //console.log(results); 
     }); 
 
 }); 
@@ -51,7 +50,8 @@ app.post('/new', function(req, res) {
         db.collection('notes').insert(new_note, function(err, result) {
             res.redirect('/');         
         }); 
-    }     
+    }
+    
 }); 
 
 

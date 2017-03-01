@@ -1,0 +1,57 @@
+<style>
+    h1 {
+        color: blue;
+    }
+</style>
+<div class="header-div">
+    <h1> Codet Live </h1> </div>
+<div id="container">
+    <div id="chats"></div>
+    <form action="/live" method="post"> 
+        <input type="text" id="username" placeholder="Title">
+        <input type="text" id="message" placeholder="Note">
+        <input type="submit" id="submit" value="Update"> </form>
+</div>
+<!--  SCRIPTS -->
+<script src="/socket.io/socket.io.js"></script>
+<script  type="text/javascript">
+    var socket = io.connect(window.location.origin);
+    var username = document.querySelector('#username');
+    var message = document.querySelector('#message');
+    var form = document.querySelector('form');
+    var chats = document.querySelector('#chats');
+
+    function writeMessage(data) {
+        var messageDiv = document.createElement('div');
+        var usernameHolder = document.createElement('span');
+        usernameHolder.innerHTML = data.username + ':';
+        usernameHolder.classList.add('username');
+        messageDiv.appendChild(usernameHolder);
+        var messageHolder = document.createElement('span');
+        messageHolder.innerHTML = data.message;
+        messageDiv.appendChild(messageHolder);
+        chats.appendChild(messageDiv);
+        chats.scrollTop = chats.scrollHeight;
+    }
+    form.addEventListener('submit', function (event) {
+        console.log("Form Test");
+        event.preventDefault();
+        if (username.value.trim() == '' || message.value.trim() == '') {
+            return false;
+        }
+        var data = {
+            username: username.value
+            , message: message.value
+        }
+        socket.emit('message', data);
+        writeMessage(data);
+        message.value = '';
+        console.log(data);
+    });
+    socket.on('message', function (data) {
+        console.log(data);
+        writeMessage(data);
+        // document.write(data);
+    });
+    console.log("It Works!")
+</script>

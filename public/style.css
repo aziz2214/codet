@@ -5,6 +5,7 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
+    margin:0px; 
 }
 
 .clr {
@@ -119,7 +120,9 @@ a {
 }
 .main .header {
   background: #44c4e7;
-  min-height: 80px;
+  min-height: 70px;
+max-height: 80px;
+
 }
 .main .header form {
   padding: 20px;

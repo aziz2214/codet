@@ -1,12 +1,19 @@
-<div><h1> My Notes:</h1> </div>
 
-<div style> 
-  
-{{#each results}}
-
-    <h1> {{subject}} </h1>
+<div class="messages" style="width:80%;"> 
+  <div><h1> My Notes:</h1> </div>
+<ul class="message-list" >
     
-    <p> {{note}} </p>
+{{#each results}}
+    <li class="new"> 
+    
+         <input type="checkbox" />
+        <div class="preview">
+        <h3> {{subject}} </h1>
+        <p> {{note}} </p>
+        </div>
+    </li>
 {{/each}}
     
+    
+    </ul>
 </div>

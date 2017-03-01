@@ -2,55 +2,100 @@
     h1 {
         color: blue;
     }
+    
+    input {
+        background: darken($accent,15%);
+        border:none; 
+        border-radius: 3px;
+        line-height: 40px;
+        padding: 0 10px;
+        
+    } 
 </style>
-<div class="header-div">
-    <h1> Codet Live </h1> </div>
-<div id="container">
-    <div id="chats"></div>
-    <form action="/live" method="post"> 
-        <input type="text" id="username" placeholder="Title">
-        <input type="text" id="message" placeholder="Note">
-        <input type="submit" id="submit" value="Update"> </form>
+
+<div class="messages">
+    <h1> Codet Live </h1> 
+    <form id="liveForm" style="padding:10px;"> 
+        <input class="search" type="text" id="titleForm" placeholder="Title">
+        <textarea id="noteBodyForm" name="note" rows="30" cols="40"></textarea> 
+
+        <input type="submit" id="submit" value="Update">
+    </form>
+    
+</div>
+
+<div class="messages" id="liveContainer" style="width:80%;">
+    <h1> <span id="title"> Title </span></h1>
+    
+<!--
+    <div class="meta-data">
+          <p>
+            <img src="http://placehold.it/40x40" class="avatar" alt=""/>
+            Hosted by  <span class="user">Albus Dumbledore</span>
+            <span class="date">March, 2017</span>
+          </p>
+        </div>
+    
+-->
+     <div class="body" id="noteBody"> </div>
+    
 </div>
 <!--  SCRIPTS -->
 <script src="/socket.io/socket.io.js"></script>
 <script  type="text/javascript">
     var socket = io.connect(window.location.origin);
-    var username = document.querySelector('#username');
-    var message = document.querySelector('#message');
+    var title = document.querySelector('#title');
+    var noteBody = document.querySelector('#noteBody');
     var form = document.querySelector('form');
     var chats = document.querySelector('#chats');
 
-    function writeMessage(data) {
-        var messageDiv = document.createElement('div');
-        var usernameHolder = document.createElement('span');
-        usernameHolder.innerHTML = data.username + ':';
-        usernameHolder.classList.add('username');
-        messageDiv.appendChild(usernameHolder);
-        var messageHolder = document.createElement('span');
-        messageHolder.innerHTML = data.message;
-        messageDiv.appendChild(messageHolder);
-        chats.appendChild(messageDiv);
-        chats.scrollTop = chats.scrollHeight;
+    function writenoteBody(data) {
+        console.log("Write noteBody Function Running."); 
+//        
+//        var noteBodyDiv = document.createElement('div');
+//        var titleHolder = document.createElement('span');
+//        
+//        titleHolder.innerHTML = data.title + ':';
+//        titleHolder.classList.add('title');
+//        noteBodyDiv.appendChild(titleHolder);
+//        var noteBodyHolder = document.createElement('span');
+//        
+//        noteBodyHolder.innerHTML = data.noteBody;
+//        noteBodyDiv.appendChild(noteBodyHolder);
+//        chats.appendChild(noteBodyDiv);
+        var title = document.querySelector('#title');
+        var noteBody = document.querySelector('#noteBody'); 
+        console.log(data.title); 
+        
+        
+
+        // replace el with newEL
+        //title.parentNode.replaceChild(newTitle, title);
+        
+        
+        title.innerHTML = data.title; 
+        noteBody.innerHTML = data.noteBody; 
+        //chats.scrollTop = chats.scrollHeight;
     }
-    form.addEventListener('submit', function (event) {
-        console.log("Form Test");
+    
+    var liveForm = document.querySelector('#liveForm');
+    liveForm.addEventListener('submit', function (event) {
         event.preventDefault();
-        if (username.value.trim() == '' || message.value.trim() == '') {
+        if (titleForm.value == '' || noteBodyForm.value == '') {
             return false;
         }
         var data = {
-            username: username.value
-            , message: message.value
+            title: titleForm.value
+            , noteBody: noteBodyForm.value
         }
         socket.emit('message', data);
-        writeMessage(data);
-        message.value = '';
+        writenoteBody(data);
         console.log(data);
     });
+    
     socket.on('message', function (data) {
         console.log(data);
-        writeMessage(data);
+        writenoteBody(data);
         // document.write(data);
     });
     console.log("It Works!")

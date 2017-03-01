@@ -70,8 +70,8 @@ app.get('/live', function(req, res) {
     res.render('live'); 
 }); 
 
-app.post('/live', function(req, res) { 
-    console.log(req.body.username); 
-    socket.emit('message', req.body.username); 
-})
+//app.post('/live', function(req, res) { 
+//    console.log(req.body.username); 
+//    //socket.emit('message', req.body.username); 
+//})
 

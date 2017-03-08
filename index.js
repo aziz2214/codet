@@ -84,11 +84,20 @@ app.get('/note/:noteName', function(req, res, next) {
     }); 
 });  
 
-//app.get('/search', function(req, res) { 
+app.get('/search', function(req, res) { 
 //    var noteTitle = req.query.title; 
-//    res.render('search'); 
-//    
-//}) ; 
+    
+    db.collection("notes").find({subject: req.query.title}).toArray(function(err, results) {
+        
+        for (i in results) { 
+            results[i].note = results[i].note.substring(0,10); 
+        }
+        res.render('search', {results: results}); 
+        //console.log(results); 
+    }); 
+    
+    
+}) ; 
 
 //app.post('/live', function(req, res) { 
 //    console.log(req.body.username); 

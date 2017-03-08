@@ -42,6 +42,10 @@ io.on('connection', function(client) {    // SOCKET.IO //
 // --> Begin EXPRESS --------
 app.get('/', function(req, res) { 
     db.collection("notes").find().toArray(function(err, results) {
+        
+        for (i in results) { 
+            results[i].note = results[i].note.substring(0,10); 
+        }
         res.render('home', {results: results}); 
         //console.log(results); 
     }); 
@@ -70,8 +74,23 @@ app.get('/live', function(req, res) {
     res.render('live'); 
 }); 
 
+app.get('/note/:noteName', function(req, res, next) { 
+    //var noteName = req.params.noteName; 
+    console.log("note Name: " + req.params.noteName); 
+    db.collection("notes").find({subject:req.params.noteName}).toArray(function(err, results) {
+        res.render('note', {results: results}); 
+        console.log(results); 
+        
+    }); 
+});  
+
+//app.get('/search', function(req, res) { 
+//    var noteTitle = req.query.title; 
+//    res.render('search'); 
+//    
+//}) ; 
+
 //app.post('/live', function(req, res) { 
 //    console.log(req.body.username); 
 //    //socket.emit('message', req.body.username); 
 //})
-

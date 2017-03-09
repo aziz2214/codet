@@ -87,7 +87,7 @@ app.get('/note/:noteName', function(req, res, next) {
 app.get('/search', function(req, res) { 
 //    var noteTitle = req.query.title; 
     
-    db.collection("notes").find({subject: req.query.title}).toArray(function(err, results) {
+    db.collection("notes").find({subject: {$regex: ".*" + req.query.title +  ".*"}}).toArray(function(err, results) {
         
         for (i in results) { 
             results[i].note = results[i].note.substring(0,10); 

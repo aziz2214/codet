@@ -74,6 +74,11 @@ app.get('/live', function(req, res) {
     res.render('live'); 
 }); 
 
+app.get('/quil', function(req, res) { 
+    res.render('quil'); 
+}); 
+
+
 app.get('/note/:noteName', function(req, res, next) { 
     //var noteName = req.params.noteName; 
     console.log("note Name: " + req.params.noteName); 

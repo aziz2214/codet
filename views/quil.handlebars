@@ -1,17 +1,19 @@
-
 <head>
+
   <script src="https://use.fontawesome.com/17694d6226.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<style>
+  <style>
     * {
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       height: 100%;
       margin: 0;
       width: 100%;
     }
+
     body {
       padding: 25px;
     }
@@ -25,7 +27,8 @@
       width: 450px;
     }
 
-    #tooltip-controls, #sidebar-controls {
+    #tooltip-controls,
+    #sidebar-controls {
       text-align: center;
     }
 
@@ -40,30 +43,50 @@
       width: 32px;
       text-align: center;
     }
-    button:active, button:focus {
+
+    button:active,
+    button:focus {
       outline: none;
     }
-
-</style>
+  </style>
 
 </head>
 
 <body>
 
-<div id="tooltip-controls">
-  <button id="bold-button"><i class="fa fa-bold"></i></button>
-  <button id="italic-button"><i class="fa fa-italic"></i></button>
-  <button id="link-button"><i class="fa fa-link"></i></button>
-  <button id="blockquote-button"><i class="fa fa-quote-right"></i></button>
-  <button id="header-1-button"><i class="fa fa-header"><sub>1</sub></i></button>
-  <button id="header-2-button"><i class="fa fa-header"><sub>2</sub></i></button>
-</div>
-<div id="sidebar-controls">
-  <button id="image-button"><i class="fa fa-camera"></i></button>
-  <button id="video-button"><i class="fa fa-play"></i></button>
-  <button id="tweet-button"><i class="fa fa-twitter"></i></button>
-  <button id="divider-button"><i class="fa fa-minus"></i></button>
-</div>
-<textarea id="editor-container">Tell your story...</textarea>
+  <div id="tooltip-controls">
+    <button id="bold-button"><i class="fa fa-bold"></i></button>
+    <button id="italic-button"><i class="fa fa-italic"></i></button>
+    <button id="link-button"><i class="fa fa-link"></i></button>
+    <button id="blockquote-button"><i class="fa fa-quote-right"></i></button>
+    <button id="header-1-button"><i class="fa fa-header"><sub>1</sub></i></button>
+    <button id="header-2-button"><i class="fa fa-header"><sub>2</sub></i></button>
+  </div>
+  <div id="sidebar-controls">
+    <button id="image-button"><i class="fa fa-camera"></i></button>
+    <button id="video-button"><i class="fa fa-play"></i></button>
+    <button id="tweet-button"><i class="fa fa-twitter"></i></button>
+    <button id="divider-button"><i class="fa fa-minus"></i></button>
+  </div>
+  <textarea id="editor-container">Tell your story...</textarea>
+
+
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.0/quill.core.min.js"> </script> 
+
+  <script>
+    'use strict';
+
+      $('button').click(function () {
+      alert('Click!');
+      });
+
+      var quill = new Quill('#editor-container');
+  </script>
+
 
 </body>

@@ -1,3 +1,4 @@
+
 <head>
 
   <script src="https://use.fontawesome.com/17694d6226.js"></script>
@@ -54,6 +55,8 @@
 
 <body>
 
+  <div>
+
   <div id="tooltip-controls">
     <button id="bold-button"><i class="fa fa-bold"></i></button>
     <button id="italic-button"><i class="fa fa-italic"></i></button>
@@ -69,5 +72,73 @@
     <button id="divider-button"><i class="fa fa-minus"></i></button>
   </div>
   <textarea id="editor-container">Tell your story...</textarea>
+
+</div>
+
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+
+  <!-- Include the Quill library -->
+  <script src="https://cdn.quilljs.com/1.2.2/quill.js"></script>
+
+
+  <script>
+  'use strict';
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var Inline = Quill.import('blots/inline');
+
+  var BoldBlot = function (_Inline) {
+    _inherits(BoldBlot, _Inline);
+
+    function BoldBlot() {
+      _classCallCheck(this, BoldBlot);
+
+      return _possibleConstructorReturn(this, _Inline.apply(this, arguments));
+    }
+
+    return BoldBlot;
+  }(Inline);
+
+  BoldBlot.blotName = 'bold';
+  BoldBlot.tagName = 'strong';
+
+  var ItalicBlot = function (_Inline2) {
+    _inherits(ItalicBlot, _Inline2);
+
+    function ItalicBlot() {
+      _classCallCheck(this, ItalicBlot);
+
+      return _possibleConstructorReturn(this, _Inline2.apply(this, arguments));
+    }
+
+    return ItalicBlot;
+  }(Inline);
+
+  ItalicBlot.blotName = 'italic';
+  ItalicBlot.tagName = 'em';
+
+  Quill.register(BoldBlot);
+  Quill.register(ItalicBlot);
+
+  var quill = new Quill('#editor-container');
+
+  $('#bold-button').click(function () {
+    quill.format('bold', true);
+  });
+  $('#italic-button').click(function () {
+    quill.format('italic', true);
+  });
+
+
+  </script>
+
 
 </body>
